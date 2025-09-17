@@ -1,0 +1,128 @@
+.tasks {
+    width: 100%;
+    min-height: calc(100vh - 5rem);
+
+    @media (max-width: 320px) {
+        min-height: calc(100vh - 4rem);
+    }
+
+    box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 1rem;
+
+    .tasks_container {
+        padding-top: 1rem;
+        box-sizing: border-box;
+        width: 100%;
+        height: fit-content;
+        min-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-family: 'CascadiaCode';
+            color: #222;
+            font-size: clamp(30px, 10vw, 50px);
+        }
+
+        .task_container {
+            height: 4rem;
+            padding: 1rem;
+            box-sizing: border-box;
+            border-bottom: 2.5px solid #555;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: all .3s ease-out;
+            will-change: transform;
+
+
+            .task_text_container {
+                flex: 1;
+                overflow: hidden;
+
+                h3 {
+                    font-family: 'CascadiaCode';
+                    color: #222;
+                    font-size: 5vw;
+                }
+
+                h3::first-letter {
+                    text-transform: uppercase;
+                }
+            }
+
+            .task_func_container {
+                width: fit-content;
+                min-width: 2rem;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                position: relative;
+                overflow: hidden;
+
+                .task_set_container {
+                    width: fit-content;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0 5px;
+                    position: absolute;
+                    right: 0;
+                    transition: all .1s;
+
+                    .del_btn {
+                        color: #c7080c;
+                        transform: scale(2.2);
+                    }
+                }
+
+
+                .task_btns_container {
+                    width: fit-content;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 1rem;
+                    position: absolute;
+                    right: 0;
+                    transition: all .1s;
+
+                    .task_checkbox_container {
+                        width: 25px;
+                        height: 25px;
+                        border-radius: 3px;
+                        border: 2px solid #222;
+                        transition: all .1s ease-out;
+                        will-change: transform;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        .task_checkbox_close_icon {
+                            transform: scale(2);
+                            color: #222;
+                            visibility: hidden;
+                            transition: all .2s ease;
+                        }
+
+                    }
+
+                    .task_checkbox_container:active,
+                    .del_btn:active {
+                        transform: scale(0.9);
+                    }
+                }
+
+            }
+
+        }
+    }
+}
