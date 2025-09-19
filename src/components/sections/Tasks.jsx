@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 export function Tasks({ tasks, handleRemoveTask, handleCompleteTask }) {
-
+    // скрываем каждую таску отдельно
     const [hiddenTaskId, setHiddenTaskId] = useState(null)
 
     useEffect(() => {
         setHiddenTaskId(null)
     }, [tasks])
+    // скрываем каждую таску отдельно
 
     return (
         <section className={styles.tasks}>
@@ -51,14 +52,6 @@ export function Tasks({ tasks, handleRemoveTask, handleCompleteTask }) {
                         </div>
                     ))
                 )}
-                {/* {tasks.map(task => (
-                    <div className={styles.task_container} key={task.id}>
-                        <div className={styles.task_text_container}>
-                            <h3>{task.id}: {task.title}</h3>
-                        </div>
-                        <div className={styles.task_checkbox_container}></div>
-                    </div>
-                ))} */}
             </div>
         </section >
     );

@@ -2,9 +2,12 @@ import styles from "@/styles/common/CreatorTaskForm.module.scss";
 import { useState } from "react";
 
 export function CreatorTaskForm({ handleCloseTasks, isOpen, handlePushTask }) {
+
+    // помещаем в состояние наш таск 
     const [inputTitleValue, setInputTitleValue] = useState('')
+    // помещаем в состояние наш таск 
 
-
+    // колбеки
     const handleTitleInputChange = (event) => {
         setInputTitleValue(event.target.value)
     }
@@ -19,6 +22,7 @@ export function CreatorTaskForm({ handleCloseTasks, isOpen, handlePushTask }) {
     const handleClose = () => {
         handleCloseTasks(!isOpen)
     }
+    // колбеки
     return (
         <div
             style={{ top: `${isOpen ? '0' : '-100'}vh` }}

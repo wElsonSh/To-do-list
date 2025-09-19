@@ -4,6 +4,7 @@ import '@/styles/main/fonts.scss';
 import '@/styles/main/index.scss';
 import { useEffect, useState } from "react";
 export function App() {
+  // конектим localStorage и массив
   const [tasks, setTasks] = useState(() => {
     try {
       const raw = localStorage.getItem('myTasks')
@@ -16,7 +17,28 @@ export function App() {
   useEffect(() => {
     localStorage.setItem('myTasks', JSON.stringify(tasks));
   }, [tasks])
+  // конектим localStorage и массив
 
+
+  // создаем часы и удаление элементов в 00:00
+  const [time, setTime] = useState(new Date())
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
+
+  useEffect(() => {
+    if (time.getHours() == 0 && time.getMinutes() == 0 && time.getSeconds() == 0) {
+      setTasks(prev => [])
+    }
+  }, [time])
+
+  // создаем часы и удаление элементов в 00:00
+
+  // ф-ии для взаимодействия с массивом 
   const handleRemoveTask = (removeTaskId) => {
     setTasks(prev => prev.filter(task => task.id !== removeTaskId))
   }
@@ -44,10 +66,13 @@ export function App() {
       setTasks(prev => [...prev, newTaskAdd])
     }
   }
+  // ф-ии для взаимодействия с массивом 
 
   return (
     <>
-      <Header handlePushTask={handlePushTask} />
+      <Header
+        time={time}
+        handlePushTask={handlePushTask} />
       <Tasks
         tasks={tasks}
         handleRemoveTask={handleRemoveTask} handleCompleteTask={handleCompleteTask} />

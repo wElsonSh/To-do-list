@@ -4,9 +4,22 @@ import { FaPlus } from "react-icons/fa6";
 import { CreatorTaskForm } from "@/components/common/CreatorTaskForm";
 import { useEffect, useState } from "react";
 
-export function Header({ handlePushTask }) {
-    const [isTCOpen, setTCOpen] = useState(false)
+export function Header({ handlePushTask, time }) {
 
+
+    // формат для часов, не знаю как это работает
+    const formatClock = (date) => {
+        return date.toLocaleTimeString('re-RU', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: undefined,
+            hout12: false
+        })
+    }
+    // формат для часов, не знаю как это работает
+
+    // отслеживаем открытие модального окна TasksCreator
+    const [isTCOpen, setTCOpen] = useState(false)
     const handleCloseTasks = (childeState) => {
         setTCOpen(childeState)
     }
@@ -21,6 +34,8 @@ export function Header({ handlePushTask }) {
             document.body.style.overflowY = "unset"
         }
     }, [isTCOpen])
+    // отслеживаем открытие модального окна TasksCreator
+
 
     return (
         <header className={styles.header}>
@@ -31,7 +46,7 @@ export function Header({ handlePushTask }) {
             />
             <div className={styles.header_container}>
                 <div className={styles.header__logo}>
-                    <h1>Hello wElson217</h1>
+                    <h1>{formatClock(time)}</h1>
                 </div>
                 <div
                     onClick={() => { setTCOpen(!isTCOpen) }}
