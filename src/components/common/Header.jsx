@@ -45,8 +45,8 @@ export function Header({ handlePushTask, time }) {
                 handlePushTask={handlePushTask}
             />
             <div className={styles.header_container}>
-                <div className={styles.header__logo}>
-                    <h1>{formatClock(time)}</h1>
+                <div className={styles.header__clock}>
+                    <h1>Ma tasks</h1>
                 </div>
                 <div
                     onClick={() => { setTCOpen(!isTCOpen) }}

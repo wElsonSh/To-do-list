@@ -1,6 +1,6 @@
 import styles from "@/styles/sections/Tasks.module.scss";
 import { useEffect, useState } from "react";
-import { IoCloseOutline } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 export function Tasks({ tasks, handleRemoveTask, handleCompleteTask }) {
     // скрываем каждую таску отдельно
@@ -27,7 +27,7 @@ export function Tasks({ tasks, handleRemoveTask, handleCompleteTask }) {
 
                             <div className={styles.task_text_container}
                                 onClick={() => setHiddenTaskId(hiddenTaskId === task.id ? null : task.id)}>
-                                <h3> {task.title}</h3>
+                                <h3 style={{ color: task.completed ? '#fff' : 'auto' }}> {task.title}</h3>
                             </div>
                             <div className={styles.task_func_container}>
                                 <div
@@ -41,10 +41,12 @@ export function Tasks({ tasks, handleRemoveTask, handleCompleteTask }) {
                                     style={{ right: hiddenTaskId === task.id ? '-5rem' : '0' }}
                                     className={styles.task_btns_container}>
                                     <div
+                                        style={{ visibility: task.completed ? 'hidden' : 'visible' }}
                                         className={styles.task_checkbox_container}
                                         onClick={() => handleCompleteTask(task.id)}
                                     >
-                                        <IoCloseOutline className={styles.task_checkbox_close_icon} />
+                                        <FaCheck
+                                            style={{ visibility: task.completed ? 'visible' : 'hidden' }} className={styles.task_checkbox_close_icon} />
                                     </div>
                                 </div>
                             </div>

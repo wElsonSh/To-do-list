@@ -1,8 +1,9 @@
 import styles from "@/styles/common/CreatorTaskForm.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function CreatorTaskForm({ handleCloseTasks, isOpen, handlePushTask }) {
 
+    const [isFocuse, setIsFocuse] = useState(false)
     // помещаем в состояние наш таск 
     const [inputTitleValue, setInputTitleValue] = useState('')
     // помещаем в состояние наш таск 
@@ -11,7 +12,6 @@ export function CreatorTaskForm({ handleCloseTasks, isOpen, handlePushTask }) {
     const handleTitleInputChange = (event) => {
         setInputTitleValue(event.target.value)
     }
-
     const handleClickCreateTask = () => {
         handlePushTask(inputTitleValue)
         handleCloseTasks(!isOpen)
@@ -23,17 +23,42 @@ export function CreatorTaskForm({ handleCloseTasks, isOpen, handlePushTask }) {
         handleCloseTasks(!isOpen)
     }
     // колбеки
+
+    useEffect(() => {
+        const handleKeyboardClick = (event) => {
+            console.log(event.key)
+
+            if (event.key == 'Escape') {
+                handleCloseTasks(false)
+            }
+            if (event.key == 'Enter') {
+                handlePushTask(inputTitleValue)
+                setInputTitleValue('')
+            }
+        }
+
+        document.addEventListener("keydown", handleKeyboardClick)
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyboardClick)
+        }
+
+    })
     return (
         <div
             style={{ top: `${isOpen ? '0' : '-100'}vh` }}
             className={styles.tasks_creator}>
-            <div className={styles.tasks_creator_container}>
+            <div
+                style={{ marginTop: isFocuse ? '2rem' : '10rem' }}
+                className={styles.tasks_creator_container}>
                 <div className={styles.tasks_creator_title} onClick={handleClose}>
-                    <h1>Create new task</h1>
+                    <h1>Click to close</h1>
                 </div>
                 <div className={styles.tasks_creator_form}>
                     <div className={styles.tasks_creator_form_inputs_container}>
                         <input
+                            onFocus={() => { setIsFocuse(true) }}
+                            onBlur={() => { setIsFocuse(false) }}
                             type="text"
                             value={inputTitleValue}
                             onChange={handleTitleInputChange}
