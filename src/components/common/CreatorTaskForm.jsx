@@ -26,7 +26,6 @@ export function CreatorTaskForm({ handleCloseTasks, isOpen, handlePushTask }) {
 
     useEffect(() => {
         const handleKeyboardClick = (event) => {
-            console.log(event.key)
 
             if (event.key == 'Escape') {
                 handleCloseTasks(false)

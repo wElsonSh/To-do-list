@@ -31,16 +31,16 @@ export function App() {
 
     return () => clearInterval(timer)
   }, [])
-
-  useEffect(() => {
-    if (time.getHours() == 0 && time.getMinutes() == 0 && time.getSeconds() == 0) {
-      setTasks(prev => [])
-    }
-  }, [time])
   // создаем часы и удаление элементов в 00:00
 
-
-
+  useEffect(() => {
+    for (var i = 0; i in tasks; i++) {
+      let timeDay = time.getDay()
+      if (timeDay != tasks[i].addTime) {
+        setTasks(prev => prev.filter(task => task.addTime == timeDay))
+      }
+    }
+  }, [time])
   // ф-ии для взаимодействия с массивом 
   const handleRemoveTask = (removeTaskId) => {
     setTasks(prev => prev.filter(task => task.id !== removeTaskId))
@@ -61,7 +61,8 @@ export function App() {
     let newTaskAdd = {
       id: tasks.length + 1,
       title: newTask.trim(),
-      completed: false
+      completed: false,
+      addTime: new Date().getDay()
     }
     var newTaskTrim = newTask.trim()
     var newTaskArr = newTaskTrim.split('')
@@ -76,7 +77,6 @@ export function App() {
   // ? здесь все таже фигня, мы задаем новое состояние на основании старого, новое состояние - это старое + newTaskAdd
   // ф-ии для взаимодействия с массивом 
 
-  localStorage.clear()
   return (
     <>
       <Header
