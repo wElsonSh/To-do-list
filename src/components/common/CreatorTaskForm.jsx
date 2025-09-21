@@ -48,7 +48,7 @@ export function CreatorTaskForm({ handleCloseTasks, isOpen, handlePushTask }) {
             style={{ top: `${isOpen ? '0' : '-100'}vh` }}
             className={styles.tasks_creator}>
             <div
-                style={{ marginTop: isFocuse ? '2rem' : '10rem' }}
+                style={{ marginTop: isFocuse ? '10rem' : '15rem' }}
                 className={styles.tasks_creator_container}>
                 <div className={styles.tasks_creator_title} onClick={handleClose}>
                     <h1>Click to close</h1>
