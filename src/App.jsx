@@ -35,7 +35,7 @@ export function App() {
 
   useEffect(() => {
     for (var i = 0; i in tasks; i++) {
-      let timeDay = time.getDay()
+      let timeDay = time.getDate()
       if (timeDay != tasks[i].addTime) {
         setTasks(prev => prev.filter(task => task.addTime == timeDay))
       }
@@ -62,7 +62,7 @@ export function App() {
       id: tasks.length + 1,
       title: newTask.trim(),
       completed: false,
-      addTime: new Date().getDay()
+      addTime: new Date().getDate()
     }
     var newTaskTrim = newTask.trim()
     var newTaskArr = newTaskTrim.split('')
@@ -80,7 +80,6 @@ export function App() {
   return (
     <>
       <Header
-        time={time}
         handlePushTask={handlePushTask} />
       <Tasks
         tasks={tasks}
